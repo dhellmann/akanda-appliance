@@ -321,7 +321,11 @@ cd /tmp/router_appliance && python setup.py install
 
 EOF
 
-cp -r $HERE/../../router_appliance/ $WDIR/tmp
+# FIXME(dhellmann): This appears to be copying
+# a directory that doesn't exist. Should it be
+# looking at the root of the repo? What was
+# in /root/router_appliance?
+#cp -r $HERE/../../router_appliance/ $WDIR/tmp
 
 # build eventlet bundle so that we do not need CC on router image
 cd $WDIR/tmp
@@ -364,9 +368,9 @@ cp $HERE/etc/rc.local $WDIR/etc/rc.local
 
 echo "[*] Add up files...."
 mkdir -p $WDIR/etc
-cat "up" > $WDIR/etc/hostname.em0
+echo "up" > $WDIR/etc/hostname.em0
 chmod 750 $WDIR/etc/hostname.em0
-cat "up" > $WDIR/etc/hostname.re0
+echo "up" > $WDIR/etc/hostname.re0
 chmod 750 $WDIR/etc/hostname.re0
 
 #echo "[*] Entering Akanda livecd builder (chroot environment)."
